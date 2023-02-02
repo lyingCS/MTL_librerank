@@ -17,7 +17,7 @@ make init
 For facilitate the training of the generator, we provide a  version of the checkpoints of CMR_evaluator that have been pretrained. We first need to decompress it.
 
 ```
-tar -xzvf ./model/save_model_ad/10/*.tar.gz ./model/save_model_ad/10/
+tar -xzvf ./model/save_model_ad/10/*.tar.gz -C ./model/save_model_ad/10/
 ```
 
 #### Run example
