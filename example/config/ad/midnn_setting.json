@@ -12,5 +12,6 @@
   "epoch_num": 50,
   "save_dir": "./model/",
   "data_dir": "./Data/ad/",
-  "acc_prefer": 0.5
+  "acc_prefer": 0.5,
+  "controllable": true
 }

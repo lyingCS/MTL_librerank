@@ -58,7 +58,7 @@ def reranker_parse_args():
     parser.add_argument('--max_time_len', default=10, type=int, help='max time length')
     parser.add_argument('--save_dir', type=str, default='./', help='dir that saves logs and model')
     parser.add_argument('--data_dir', type=str, default='./data/ad/', help='data dir')
-    parser.add_argument('--model_type', default='EGR_generator',
+    parser.add_argument('--model_type', default='Seq2Slate',
                         choices=['PRM', 'DLCM', 'SetRank', 'GSF', 'miDNN', 'Seq2Slate', 'EGR_evaluator',
                                  'EGR_generator', 'CMR'],
                         type=str,
@@ -83,18 +83,22 @@ def reranker_parse_args():
     # parser.add_argument('--decay_rate', default=1.0, type=float, help='learning rate decay rate')
     parser.add_argument('--timestamp', type=str, default=datetime.datetime.now().strftime("%Y%m%d%H%M"))
     parser.add_argument('--evaluator_path', type=str, default='', help='evaluator ckpt dir')
-    # parser.add_argument('--reload_path', type=str,
-    #                     default='./model/save_model_ad/10/202301111442_lambdaMART_CMR_generator_16_0.0001_0.0001_64_16_0.8_controllable/5',
-    #                     help='model ckpt dir')
-    # parser.add_argument('--reload_path', type=str,
-    #                     default='./model/save_model_ad/10/202301112327_lambdaMART_CMR_generator_16_0.0001_0.0001_64_16_0.8_controllable/25',
-    #                     help='model ckpt dir')
+    #1234
     # parser.add_argument('--reload_path', type=str, default='./model/save_model_ad/10/202301110047_lambdaMART_CMR_generator_16_0.0001_0.0001_64_16_0.8_controllable', help='model ckpt dir') #38081
-    # parser.add_argument('--reload_path', type=str, default='./model/save_model_ad/10/202301122214_lambdaMART_Seq2Slate_16_0.0001_0.0001_64_16_0.8_controllable/', help='model ckpt dir')
-    parser.add_argument('--reload_path', type=str, default='./model/save_model_ad/10/202301132321_lambdaMART_EGR_generator_16_0.0001_0.0001_64_16_0.8_controllable', help='model ckpt dir')
+    parser.add_argument('--reload_path', type=str, default='./model/save_model_ad/10/202301122214_lambdaMART_Seq2Slate_16_0.0001_0.0001_64_16_0.8_controllable/', help='model ckpt dir')
+    # parser.add_argument('--reload_path', type=str, default='./model/save_model_ad/10/202301132321_lambdaMART_EGR_generator_16_0.0001_0.0001_64_16_0.8_controllable', help='model ckpt dir')
+    # parser.add_argument('--reload_path', type=str, default='./model/save_model_ad/10/202301161042_lambdaMART_PRM_32_5e-05_0.0001_64_16_0.8_controllable', help='model ckpt dir')
+    #2234
+    # parser.add_argument('--reload_path', type=str, default='./model//save_model_ad/10/202301160955_lambdaMART_CMR_generator_16_0.0001_0.0001_64_16_0.8_controllable', help='model ckpt dir')
+    # parser.add_argument('--reload_path', type=str, default='./model/save_model_ad/10/202301171220_lambdaMART_miDNN_64_0.0001_9e-05_64_16_0.8_controllable', help='model ckpt dir')
+    # parser.add_argument('--reload_path', type=str, default='./model/save_model_ad/10/202301162239_lambdaMART_EGR_generator_16_0.0001_0.0001_64_16_0.8_controllable', help='model ckpt dir')
+    #3234
+    # parser.add_argument('--reload_path', type=str, default='./model//save_model_ad/10/202301181615_lambdaMART_CMR_generator_16_0.0001_0.0001_64_16_0.8_controllable', help='model ckpt dir')
+    # parser.add_argument('--reload_path', type=str, default='./model/save_model_ad/10/202301181616_lambdaMART_EGR_generator_16_0.0001_0.0001_64_16_0.8_controllable', help='model ckpt dir')
+
     # parser.add_argument('--setting_path', type=str, default='./config/prm_setting.json', help='setting dir')
     parser.add_argument('--setting_path', type=str, default='./example/config/ad/seq2slate_setting.json',
-                        help='setting dir')
+                help='setting dir')
     parser.add_argument('--controllable', type=bool, default=False, help='is controllable')
     FLAGS, _ = parser.parse_known_args()
     return FLAGS
@@ -145,6 +149,14 @@ if __name__ == '__main__':
         model = PPOModel(num_ft, params.eb_dim, params.hidden_size, max_time_len, itm_spar_fnum, itm_dens_fnum,
                         profile_fnum, max_norm=params.max_norm, rep_num=params.rep_num, acc_prefer=params.acc_prefer,
                         is_controllable=params.controllable)
+    elif params.model_type == 'PRM':
+        model = PRM(num_ft, params.eb_dim, params.hidden_size, max_time_len, itm_spar_fnum, itm_dens_fnum,
+                    profile_fnum, max_norm=params.max_norm, is_controllable=params.controllable,
+                    acc_prefer=params.acc_prefer)
+    elif params.model_type == 'miDNN':
+        model = miDNN(num_ft, params.eb_dim, params.hidden_size, max_time_len, itm_spar_fnum, itm_dens_fnum,
+                    profile_fnum, max_norm=params.max_norm, is_controllable=params.controllable,
+                    acc_prefer=params.acc_prefer)
     with model.graph.as_default() as g:
         sess = tf.Session(graph=g, config=tf.ConfigProto(gpu_options=gpu_options))
         model.set_sess(sess)

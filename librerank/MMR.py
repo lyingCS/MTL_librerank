@@ -144,6 +144,8 @@ if __name__ == '__main__':
     ilad_l = list(map(lambda a: a[2], res[3]))
     err_ia_5_l = list(map(lambda a: a[2], res[4]))
     err_ia_l = list(map(lambda a: a[3], res[4]))
+    all_data_dict = {"all_data": [map_5_l, map_l, ndcg_5_l, ndcg_l, ilad_l, err_ia_5_l, err_ia_l]}
+    print(all_data_dict["all_data"])
     for i in [0, 5, 10]:
         print(map_5_l[i], map_l[i], ndcg_5_l[i], ndcg_l[i], ilad_l[i], err_ia_5_l[i], err_ia_l[i])
     x = [i / 10 for i in range(len(map_l))]

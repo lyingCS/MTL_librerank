@@ -31,15 +31,33 @@ model_name = '{}_{}_{}_{}_{}_{}_{}_{}_{}_{}.monitor2.pkl'.format(timestamp, init
                                                                  hidden_size, eb_dim, keep_prob,
                                                                  acc_prefer if not controllable else 'controllable')
 
-model_name, model_type = '202301112327_lambdaMART_CMR_generator_16_0.0001_0.0001_64_16_0.8_controllable.monitor2.pkl', \
-                         'CMR_generator'  # 26179
-
-model_name, model_type = '202301122214_lambdaMART_Seq2Slate_16_0.0001_0.0001_64_16_0.8_controllable.monitor2.pkl', \
-                         'Seq2Slate'  # 26179
-model_name, model_type = '202301141027_lambdaMART_PRM_32_5e-05_0.0001_64_16_0.8_controllable.monitor2.pkl', \
-                         'PRM'  # 26179
+#1234
+# model_name, model_type = '202301112327_lambdaMART_CMR_generator_16_0.0001_0.0001_64_16_0.8_controllable.monitor2.pkl', \
+#                          'CMR_generator'  # 26179
+# model_name, model_type = '202301122214_lambdaMART_Seq2Slate_16_0.0001_0.0001_64_16_0.8_controllable.monitor2.pkl', \
+#                          'Seq2Slate'  # 26179
+# model_name, model_type = '202301161042_lambdaMART_PRM_32_5e-05_0.0001_64_16_0.8_controllable.monitor2.pkl', \
+#                          'PRM'  # 26179
 # model_name, model_type = '202301132321_lambdaMART_EGR_generator_16_0.0001_0.0001_64_16_0.8_controllable.monitor2.pkl', \
 #                          'EGR_generator'  # 26179
+#2234
+# model_name, model_type = '202301161705_lambdaMART_PRM_32_5e-05_0.0001_64_16_0.8_controllable.monitor2.pkl', \
+#                          'PRM'  # 26179
+# model_name, model_type = '202301160955_lambdaMART_CMR_generator_16_0.0001_0.0001_64_16_0.8_controllable.monitor2.pkl', \
+#                          'CMR_generator'  # 26179
+# model_name, model_type = '202301162239_lambdaMART_EGR_generator_16_0.0001_0.0001_64_16_0.8_controllable.monitor2.pkl', \
+#                          'EGR_generator'  # 26179
+# model_name, model_type = '202301162023_lambdaMART_Seq2Slate_16_0.0001_0.0001_64_16_0.8_controllable.monitor2.pkl', \
+#                          'Seq2Slate'  # 26179
+# model_name, model_type = '202301171220_lambdaMART_miDNN_64_0.0001_9e-05_64_16_0.8_controllable.monitor2.pkl', \
+#                          'miDNN'  # 26179
+#3234
+# model_name, model_type = '202301181615_lambdaMART_CMR_generator_16_0.0001_0.0001_64_16_0.8_controllable.monitor2.pkl', \
+#                          'CMR_generator'  # 26179
+# model_name, model_type = '202301181616_lambdaMART_EGR_generator_16_0.0001_0.0001_64_16_0.8_controllable.monitor2.pkl', \
+#                          'EGR_generator'  # 26179
+model_name, model_type = '202301181616_lambdaMART_Seq2Slate_16_0.0001_0.0001_64_16_0.8_controllable.monitor2.pkl', \
+                         'Seq2Slate'  # 26179
 f = open(save_dir + model_name, 'rb')
 f.flush()
 data = pickle.load(f)

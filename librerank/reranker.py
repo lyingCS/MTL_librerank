@@ -168,8 +168,9 @@ class BaseModel(object):
         inf_mask = tf.where(tf.equal(1 - mask, 0), tf.fill(tf.shape(raw_feature), 0.0),
                             tf.fill(tf.shape(raw_feature), float('inf')))
         N = tf.shape(raw_feature)[1]
-        seq_len_num = tf.cast(tf.tile(tf.reshape(self.seq_length_ph, [-1, 1, 1]), [1, 1, raw_feature.get_shape()[-1].value])
-                              , dtype=tf.float32)
+        seq_len_num = tf.cast(
+            tf.tile(tf.reshape(self.seq_length_ph, [-1, 1, 1]), [1, 1, raw_feature.get_shape()[-1].value])
+            , dtype=tf.float32)
         tensor_global_max = tf.reduce_max(raw_feature - inf_mask, axis=1, keep_dims=True)  # (B, 1, d2)
         # return inf_mask
         tensor_global_min = tf.reduce_min(raw_feature + inf_mask, axis=1, keep_dims=True)  # (B, 1, d2)
@@ -268,7 +269,7 @@ class BaseModel(object):
             ret = activation(ret)
         return ret
 
-    def build_diversity_loss(self, y_pred, t=1e-3, prefer_div=0.5, balance_coef=10000):
+    def build_diversity_loss(self, y_pred, t=1e-3, prefer_div=0.5, balance_coef=1e4):
         y_pred = y_pred / (tf.reshape(tf.reduce_sum(y_pred, axis=1), [-1, 1]) + 1e-5)
         # gather [B, N, spar_dim] -> [B, N, 1]
         # cate_id = tf.divide(tf.cast(tf.gather(self.itm_spar_ph, [1], axis=2), dtype=tf.float32), t)
@@ -517,9 +518,9 @@ class GSF(BaseModel):
 
 class miDNN(BaseModel):
     def __init__(self, feature_size, eb_dim, hidden_size, max_time_len, itm_spar_num, itm_dens_num,
-                 profile_num, max_norm=None, acc_prefer=1, hidden_layer_size=[512, 256, 128]):
+                 profile_num, is_controllable, max_norm=None, acc_prefer=1, hidden_layer_size=[512, 256, 128]):
         super(miDNN, self).__init__(feature_size, eb_dim, hidden_size, max_time_len,
-                                    itm_spar_num, itm_dens_num, profile_num, max_norm, acc_prefer)
+                                    itm_spar_num, itm_dens_num, profile_num, max_norm, acc_prefer, is_controllable)
 
         with self.graph.as_default():
             fmax = tf.reduce_max(tf.reshape(self.item_seq, [-1, self.max_time_len, self.ft_num]), axis=1,
@@ -529,7 +530,13 @@ class miDNN(BaseModel):
             global_seq = (self.item_seq - fmin) / (fmax - fmin + 1e-8)
             inp = tf.concat([self.item_seq, global_seq], axis=-1)
 
+            if self.is_controllable:
+                inp = self.build_hyper_mlp_net_scope(inp, inp.get_shape()[-1].value, inp.get_shape()[-1].value,
+                                                     "hyper_dnn_midnn_1")
             self.y_pred = self.build_miDNN_net(inp, hidden_layer_size)
+            if self.is_controllable:
+                inp = self.build_hyper_mlp_net_scope(inp, inp.get_shape()[-1].value, inp.get_shape()[-1].value,
+                                                     "hyper_dnn_midnn_2")
             self.build_logloss(self.y_pred)
 
     def build_miDNN_net(self, inp, layer, scope='mlp'):

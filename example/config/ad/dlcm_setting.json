@@ -10,7 +10,6 @@
   "eb_dim": 16,
   "hidden_size": 64,
   "epoch_num": 100,
-  "acc_prefer": 0.5,
   "save_dir": "./model/",
   "data_dir": "./Data/ad/"
 }

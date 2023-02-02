@@ -13,6 +13,6 @@
   "save_dir": "./model/",
   "data_dir": "./Data/ad/",
   "evaluator_path": "./model/save_model_ad/10/202202101214_mart_EGR_evaluator_16_0.0005_0.0002_64_16_0.8",
-  "controllable": true,
-  "acc_prefer": 0.5
+  "controllable": false,
+  "acc_prefer": 1
 }
