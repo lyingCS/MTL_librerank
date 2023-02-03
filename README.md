@@ -11,6 +11,7 @@ Our experimental environment is Ubuntu18.04+Python3.8+CUDA11.4+TensorFlow1.15.5.
 ```
 git clone https://github.com/lyingCS/MTL_librerank.git
 cd MTL_librerank
+pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/   # optional
 make init 
 ```
 
