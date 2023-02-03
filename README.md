@@ -4,6 +4,8 @@ MTL_librerank is an extended version of [LibRerank](https://github.com/LibRerank
 
 ## Quick Started
 
+Our experimental environment is Ubuntu18.04+Python3.8+CUDA11.4+TensorFlow1.15.5.
+
 #### Install MTL_librerank from source
 
 ```
