@@ -6,6 +6,14 @@ MTL_librerank is an extended version of [LibRerank](https://github.com/LibRerank
 
 Our experimental environment is Ubuntu20.04+Python3.8+CUDA11.4+TensorFlow1.15.5.
 
+#### Create virtual environment(optional)
+
+```
+pip install --user virtualenv
+~/.local/bin/virtualenv -p python3 ./venv
+source venv/bin/activate
+```
+
 #### Install MTL_librerank from source
 
 ```
