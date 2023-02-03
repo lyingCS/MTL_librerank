@@ -4,8 +4,6 @@ MTL_librerank is an extended version of [LibRerank](https://github.com/LibRerank
 
 ## Quick Started
 
-Our experimental environment is Ubuntu18.04+Python3.8+CUDA11.4+TensorFlow1.15.5.
-
 #### Install MTL_librerank from source
 
 ```
@@ -16,7 +14,7 @@ make init
 
 #### Decompress evaluator checkpoint
 
-For facilitate the training of the generator, we provide a  version of the checkpoint of CMR_evaluator that have been pretrained. We first need to decompress it.
+For facilitate the training of the generator, we provide a  version of the checkpoints of CMR_evaluator that have been pretrained. We first need to decompress it.
 
 ```
 tar -xzvf ./model/save_model_ad/10/*.tar.gz -C ./model/save_model_ad/10/
@@ -24,7 +22,7 @@ tar -xzvf ./model/save_model_ad/10/*.tar.gz -C ./model/save_model_ad/10/
 
 #### Run example
 
-Run re-ranker(train CMR_generator)
+Run re-ranker
 
 ```
 python run_reranker.py
