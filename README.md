@@ -12,7 +12,7 @@ cd MTL_librerank
 make init 
 ```
 
-#### Install MTL_librerank from source
+#### Decompress evaluator checkpoint
 
 For facilitate the training of the generator, we provide a  version of the checkpoints of CMR_evaluator that have been pretrained. We first need to decompress it.
 
