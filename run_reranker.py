@@ -639,8 +639,8 @@ def reranker_parse_args():
 
 if __name__ == '__main__':
     # parameters
-    random.seed(5234)
-    set_global_determinism(5234)
+    random.seed(1234)
+    set_global_determinism(1234)
     parse = reranker_parse_args()
     if parse.setting_path:
         parse = load_parse_from_json(parse, parse.setting_path)
