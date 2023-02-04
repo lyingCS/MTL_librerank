@@ -2,6 +2,16 @@
 
 MTL_librerank is an extended version of [LibRerank](https://github.com/LibRerank-Community/LibRerank) 
 
+## Requirements
+
++ Ubuntu 20.04 or later (64-bit)
++ GPU support requires a CUDA®-enabled card
++ For NVIDIA GPUs, the r455 driver must be installed
+
+For wheel installation:
++ Python 3.8
++ pip 19.0 or later
+
 ## Quick Started
 
 Our experimental environment is Ubuntu20.04(necessary)+Python3.8(necessary)+CUDA11.4+TensorFlow1.15.5.
