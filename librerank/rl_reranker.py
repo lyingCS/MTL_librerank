@@ -406,7 +406,7 @@ class PPOModel(RLModel):
             loss_clip = tf.minimum(tf.multiply(self.gaes, ratios), tf.multiply(self.gaes, clipped_ratios))
         else:
             div_loss_clip = tf.minimum(tf.multiply(self.div_gaes, ratios), tf.multiply(self.div_gaes, clipped_ratios))
-            auc_loss_clip = tf.minimum(tf.multiply(self.div_gaes, ratios), tf.multiply(self.div_gaes, clipped_ratios))
+            auc_loss_clip = tf.minimum(tf.multiply(self.auc_gaes, ratios), tf.multiply(self.auc_gaes, clipped_ratios))
             if self.is_controllable:
                 self.auc_loss = tf.multiply(auc_loss_clip, self.controllable_auc_prefer)
                 self.div_loss = tf.multiply(div_loss_clip, 1 - self.controllable_auc_prefer)
